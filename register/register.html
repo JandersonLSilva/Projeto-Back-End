@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./css/Logo-echoCMS.svg" type="image/icon">
-    <link rel="stylesheet" href="./css/login.css">
-    <title>Fazer Login no EchoCMS</title>
+    <link rel="stylesheet" href="./css/register.css">
+    <title>Fazer Cadastro no EchoCMS</title>
 </head>
 <body>
     <div class="background-form">
         <span class="logo"></span>
         <div class="div-left">
             <h1 id="h1-left">
-                <span>Bem Vindo de Volta</span>
+                <span>Seja Bem Vindo</span>
                 <span>ao EchoCMS</span>
             </h1>
         </div>
         <div class="div-form">
             <h1  id="h1-right">
-                Faça Login na Sua Conta
+                Faça o Cadastro da Sua Conta
             </h1>
-            <form action="/login" method="post">
+            <form action="/register" method="post">
                 <div class="input-form">
                     
                         <div class="user">
@@ -28,10 +28,13 @@
                             <label for="user-input">Digite o Email</label>
                         </div>
                         <div class="key">
-                            <input type="password" name="keyValid" id="key-input" required>
+                            <input type="password" name="keyValid" class="key-input" required>
                             <label for="key-input">Senha</label>
+                        </div>
+                        <div class="key">
+                            <input type="password" name="keyValid" class="key-input" required>
+                            <label for="key-input2">Confirmar Senha</label>
                             <span class="eye-key" onclick="showKey()"></span>
-                            <a href="/reqsenha" id="reqsenha"><p>Esqueceu a Senha?</p></a>
                             <Button type="submit" id="button-submit">Continuar</Button>
                         </div>
 
@@ -41,8 +44,10 @@
     </div>
         <script>
         function showKey() {
-            var key = document.getElementById("key-input");
-            (key.type === "password") ? key.type = "text" : key.type = "password"
+            var keys = document.querySelectorAll(".key-input");
+            keys.forEach(function(key) {
+                (key.type === "password") ? key.type = "text" : key.type = "password"
+            });
             var eye = document.getElementsByClassName("eye-key")[0]
             eye.classList.contains("clicked") ? eye.classList.remove("clicked") : eye.classList.add("clicked")
         }
