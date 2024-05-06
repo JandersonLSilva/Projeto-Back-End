@@ -1,0 +1,201 @@
+/* Importando uma fonte */
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('./SourceSansPro-SemiboldIt.otf');
+}
+
+/* Estilos para o body */
+body{
+    background-image: url("./background-image-white.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Source Sans Pro';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Estilos para a logo */
+.logo{
+    background-image: url("./Banner-echoCMS.svg");
+    background-repeat: no-repeat;
+    display: block;
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    left: 10px;
+    top: 10px;
+}
+
+/* Estilos para os h1 */
+h1{
+    color: #31465e;
+    display: flex;
+    flex-direction: column;
+    font-size: 40px;
+}
+
+
+#h1-right{
+    align-items: start;
+    position: relative;
+    left: 9px;
+    font-size: 26px;
+}
+
+/* Estilos para o background-form */
+.background-form {
+    background-color: rgba(255, 255, 255, 0.288);
+    backdrop-filter: blur(80px);
+    width: 900px;
+    height: 400px;
+    margin: 10px 6px;   
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.div-form{
+    width: 440px;
+}
+
+/* Estilos para o input-form */
+.input-form {
+    position: relative;
+    height: 300px;
+    width: 423px;
+}
+  
+/* Estilo para os inputs de user e key */
+.user, .key{
+    position: relative;
+    width: 400px;
+    height: 50px;
+    padding: 10px;
+    font-size: 18px;
+    bottom: 14px;
+}
+
+/* Estilo para os inputs */
+input{
+    font-family: 'Source Sans Pro';
+    color: rgb(73, 73, 73);
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    border: 1px solid rgb(90, 122, 158);
+    padding-left: 4px;
+    background-color: transparent;
+    margin-top: 10px;
+}
+
+/* Estilo para os labels */
+label{
+    color: #8383839c;
+    padding: 2px;
+    position: absolute;
+    left: 14px;
+    font-size: 13px;
+    pointer-events: none;
+    transition: bottom 0.01s, font-size 0.01s;
+    bottom: 14px;
+}
+  
+/* Estilo para os labels quando o input está com foco */
+input:required:valid + label,
+input:focus + label{
+    color: rgb(90, 122, 158);
+    bottom: 48px;
+    font-size: 13px;
+}
+
+/* Estilo para o input com foco */
+input:focus {
+    border: 1px solid #5a7a9e;
+    outline: none;
+}
+
+/* Estilo para o ícone de olho */
+.eye-key{
+    background-image: url("./show.svg");
+    display: block;
+    position: relative;
+    bottom: 30px;
+    left: 376px;
+    width: 20px;
+    height: 10px;
+    cursor: pointer;
+}
+
+/* Estilo para o ícone de olho quando clicado */
+.clicked{
+    background-image: url("./hide.svg");
+}
+
+/* Estilo para o link de requperar senha */
+#reqsenha > p{
+    color: rgb(41, 142, 182);
+    font-size: 14px;
+    width: 112px;
+    height: 14px;
+    position: relative;
+    bottom: 10px;
+    left: 10px;
+}
+#reqsenha{
+    text-decoration: none;
+}
+#reqsenha > p:hover{
+    background-color: rgba(135, 192, 216, 0.082);
+}
+
+/* Estilo para o botão de submit */
+#button-submit{
+    font-family: 'Source Sans Pro';
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(46, 138, 190);
+    width: 407px;
+    height: 50px;
+    border: none;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+}
+#button-submit:hover{
+    background-color: rgb(57, 145, 196);
+}
+
+/* Ajustando alguns elementos pelo tamanho da tela */
+@media (max-width: 900px) {
+    .background-form {
+        width: 850px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    #h1-left{
+        width: 220px; 
+        margin-left: 10PX; 
+    }
+}
+@media (max-width: 700px) {
+    body{
+        width: 648px;
+    }
+    .background-form {
+        width: 600px;
+    }
+    .user, .key{
+        width: 52vw;
+    }
+    #button-submit {
+        width: 53.3vw;
+    }
+    .eye-key{
+        left: 95%;
+    }
+}
+
