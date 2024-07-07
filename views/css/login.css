@@ -1,12 +1,12 @@
 /* Importando uma fonte */
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('./SourceSansPro-SemiboldIt.otf');
+    src: url('./fonts/SourceSansPro-SemiboldIt.otf');
 }
 
 /* Estilos para o body */
 body{
-    background-image: url("./background-image-white.jpg");
+    background-image: url("./background/background-image-white.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Source Sans Pro';
@@ -17,8 +17,8 @@ body{
 }
 
 /* Estilos para a logo */
-.logo{
-    background-image: url("./Banner-echoCMS.svg");
+.span-logo{
+    background-image: url("./images/Banner-echoCMS.svg");
     background-repeat: no-repeat;
     display: block;
     position: absolute;
@@ -125,7 +125,7 @@ input:focus {
 
 /* Estilo para o ícone de olho */
 .eye-key{
-    background-image: url("./show.svg");
+    background-image: url("./images/show.svg");
     display: block;
     position: relative;
     bottom: 30px;
@@ -137,7 +137,7 @@ input:focus {
 
 /* Estilo para o ícone de olho quando clicado */
 .clicked{
-    background-image: url("./hide.svg");
+    background-image: url("./images/hide.svg");
 }
 
 /* Estilo para o link de requperar senha */

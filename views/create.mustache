@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="./css/images/Logo-echoCMS.svg" type="image/icon">
+        <link rel="stylesheet" href="./css/create.css">
+        <title>Criar Conteúdo</title>
+    </head>
+    <body>
+        {{#error}}
+        <p class="p-error">{{error}}<span>×</span></p>
+        {{/error}}
+        
+        <header>
+            <div class="div-menu"><span></span></div>
+            <a href="/"><span class="span-logo"></span></a>
+            <span class="span-profile"></span>
+            
+            <div class="window-profile"><a href="/logout"><span>Sair da Conta</a></span></div>
+            
+        </header>
+        <div class="div-main">
+            <form action="/create" method="POST">
+                <div class="div-form-top">
+                    
+                    <div class="div-top-left">
+
+                        <div class="div-title">
+                            <p>Titulo da Página</p>
+                            <input type="text" id="title-input" name="title" required>
+                        </div>
+                
+                        <div class="div-route">
+                            <p>Link / Rota</p>
+                            <input type="text" id="route-input" name="route" required>
+                        </div>
+
+                    </div>
+
+                    <div class="div-top-right">
+
+                        <div class="div-opc">
+                            <span class="span-cancel"><p>Cancelar</p></span>
+                            <span class="span-pub"><span></span><p>Publicar</p></span>
+                        </div>
+                        <div class="div-up-image">
+                            <div class="btn-up-image"><span></span><p>Enviar Imagem</p></div><input type="url" name="image" id="url-image" value="https://">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="div-form-bottom">
+                    <div><div><span>B</span></div><div><span>I</span></div><div><span>U</span></div></div>
+                    <textarea name="textPage" id="text-page"></textarea>
+                </div>
+            </form>
+        </div>
+        <script>
+                let contents = document.querySelectorAll('.div-content');
+
+                contents.forEach(content => {
+                    content.addEventListener('click', () => {
+                        let route = content.getAttribute('data-route');
+                        window.location.href = route;
+                    });
+                });
+
+                let spanProfile = document.querySelector(".span-profile");
+                spanProfile.addEventListener("click", () => {
+                    let windowP = document.querySelector(".window-profile");
+                    windowP.style.display = (windowP.style.display == 'block') ? 'none' : 'block';
+
+                    console.log(spanProfile.classList);
+                    if(spanProfile.classList.contains("span-profile-dark")){
+                        console.log("Removing class");
+                        spanProfile.classList.remove("span-profile-dark");
+                    }
+                    else{
+                        console.log("Adding class");
+                        spanProfile.classList.add("span-profile-dark")
+                    }
+                     console.log(spanProfile.classList);
+                });
+
+                if( document.querySelector(".p-error>span")){
+                    let spanError = document.querySelector(".p-error>span");
+                    spanError.addEventListener('click', () => {
+                        window.location.href = '/';
+                    });
+                }
+
+                spanPub = document.querySelector(".span-pub");
+                spanPub.addEventListener('click', () => {
+                    document.querySelector("form").submit();
+                });
+
+                spanCancel = document.querySelector(".span-cancel");
+                spanCancel.addEventListener('click', () => {
+                    window.location.href = '/';
+                });
+        </script>
+    </body>
+</html>
