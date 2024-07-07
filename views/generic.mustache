@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="./css/images/Logo-echoCMS.svg" type="image/icon">
+        <link rel="stylesheet" href="./css/generic.css">
+        <title>Generic</title>
+    </head>
+    <body>
+        {{#error}}
+        <p class="p-error">{{error}}<span>×</span></p>
+        {{/error}}
+        
+        <header>
+            <div class="div-menu"><span></span></div>
+            <a href="/"><span class="span-logo"></span></a>
+            {{^login}}
+                <a href="/login"><span class="span-login"></span></a>
+            {{/login}}
+            {{#login}}
+            <span class="span-profile"></span>
+            <div class="window-profile"><a href="/logout"><span>Sair da Conta</a></span></div>
+            
+            
+            {{/login}}
+        </header>
+        <div class="div-main">
+        {{! <li></li> }}
+                {{#generic}}
+                    <li>{{nome}} {{sobrenome}}</li>
+                {{/generic}}
+                
+            
+        </div>
+        <script>
+            
+        </script>
+    </body>
+</html>
