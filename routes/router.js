@@ -26,35 +26,20 @@ router.get("/", (req, res) =>{
     if(!req.cookies.acess)
         res.redirect("/welcome");
     else if(req.session.user)
-        res.render("home", {login: "false", contents: contentModel.getContents()});
+        res.render("home", {login: "false", contents: contentModel.getContents().reverse()});
     else if(req.session.error){
         delete req.session.error;
         if(req.session.user)
-            res.render("home", {login: "false"}, {error: "Você precisa estar logado para acessar essa opção", contents: contentModel.getContents()}); // melhorar esse sistema
+            res.render("home", {login: "false"}, {error: "Você precisa estar logado para acessar essa opção", contents: contentModel.getContents().reverse()}); // melhorar esse sistema
         else
-            res.render("home", {error: "Você precisa estar logado para acessar essa opção", contents: contentModel.getContents()}); // melhorar esse sistema
+            res.render("home", {error: "Você precisa estar logado para acessar essa opção", contents: contentModel.getContents().reverse()}); // melhorar esse sistema
     }
     else{
-        // console.log(contentModel.getContents());
-        res.render("home", {contents: contentModel.getContents()});
+        // console.log(contentModel.getContents().reverse());
+        res.render("home", {contents: contentModel.getContents().reverse()});
     }
 });
 
-
-
-
-let generic = [
-    {
-        nome: "Janderson", sobrenome: "Lima Silva"
-    },
-    {
-        nome: "Jefferson", sobrenome: "Lima Silva"
-    }
-]
-
-router.get("/generic", (req, res) => {
-    res.render("generic", {generic})
-});
 
 
 router.get("/welcome", (req, res) =>{
@@ -82,7 +67,7 @@ router.post('/login', (req, res)=>{
         req.session.user = process.env.USER_USERNAME;
         res.redirect("/");
     }else{
-        res.render("login", {error: "Usuário ou senha incorretos"});
+        res.render("login", {error: "Usuário ou senha incorretos"}); // lebrar de tratar erro já está logado
     }   
 
 });
@@ -110,11 +95,13 @@ router.get("/logout", (req, res) =>{ // obs.: tratar possiveis erros
 });
 
 
-
-
 contentModel.getContents().forEach(content => {
     router.get(content.route, (req, res) =>{  // possivel maneira de acessar as paginas  // cogitar colocar um caminho antes
-        res.render("generic", {title: content.title, text: content.text});
+        if(req.session.user){
+            res.render("generic", {login: "false", title: content.title, text: content.text, image: content.image});
+        }else{
+            res.render("generic", {title: content.title, text: content.text, image: content.image});
+        }
     });
 });
 

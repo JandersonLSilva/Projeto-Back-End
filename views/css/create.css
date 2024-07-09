@@ -51,21 +51,6 @@ body{
 }
 
 
-.p-error{
-    background-color: rgba(252, 74, 74, 0.322);
-    color: rgba(99, 19, 19, 0.575);
-    font-size: 14px;
-    width: calc (100% - 10px);  
-    height: 3.4%;
-    padding-left: 10px;
-    padding-top: 0.3%;
-}
-.p-error > span{
-    float: right;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
 /* Estilos para o cabeçario do site */
 header{
     background-color: rgba(240, 255, 255, 0.85); /* #3D5571 */

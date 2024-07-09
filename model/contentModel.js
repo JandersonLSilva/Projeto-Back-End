@@ -15,12 +15,13 @@ module.exports = {
         return today;
     },
     addContent(title, route, image, text){
-        if(!this.contentsIsEmpty())
+        if(!this.contentsIsEmpty()){
             contents = JSON.parse(fs.readFileSync('contents.json', 'utf8'));
-
+            id_count = contents[contents.length - 1].id + 1;
+        }
         let dateUp = this.getDateActual();
         let content = {
-            id: id_count++,
+            id: id_count,
             title: title,
             dateUp: dateUp,
             route: route,
@@ -50,9 +51,11 @@ module.exports = {
         return resSearch;
     },
     getContents(){
-        console.log(!this.contentsIsEmpty());
+        // console.log(!this.contentsIsEmpty());
         if(!this.contentsIsEmpty())
             contents = JSON.parse(fs.readFileSync('contents.json', 'utf8'));
+        // let lenght = contents.length
+        // console.log(contents.slice(lenght-1)[0].id);
         return contents;
     },
     getContentById(id){

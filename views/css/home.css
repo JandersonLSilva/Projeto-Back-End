@@ -312,6 +312,7 @@ header{
     background-color: transparent;
     border: 1px solid #3d55719d;
     border-radius: 6px;
+    overflow: scroll;
 }
 
 /* Estilos dos elementos de conteudos da Pagina */
@@ -336,8 +337,7 @@ header{
     margin-right: 16px;
     
     border-radius: 4px;
-    background-image: url("https://photos.smugmug.com/photos/i-LjCxwSN/0/Lf5p7gr4m3R9K5KXB6GnHbm6CJVqK2bvBtzFJmftQ/Ti/i-LjCxwSN-Ti.png");
-    background-size: contain;
+    background-size: cover;
     background-repeat: none;
 
 }

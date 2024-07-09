@@ -37,29 +37,12 @@
                     </div>
                 </div>
                 <div class="div-main-contents">
-
-                    {{! <div class="div-content" data-route="/javaparainiciantes">
-                        <span class="span-content-icon"></span>
-                        <div>
-                            <h4 class="h4-content-title">Java Para Iniciantes - Java do Básico ao Avançado sssssssssssssssssssssssss</h4>
-                            <p class="p-content-dateup">Útima Atualização: 05/07/2024</p>
-                        </div>
-                        <p class="p-content-info">Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo. Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo.</p>
-                    </div> }}
-                    {{! <div class="div-content" data-route="/rota2">
-                        <span class="span-content-icon"></span>
-                        <div>
-                            <h4 class="h4-content-title"></h4>
-                            <p class="p-content-dateup"></p>
-                        </div>
-                        <p class="p-content-info"></p>
-                    </div> }}
                     {{#contents}}
                         <div class="div-content" data-route={{route}}>
                             <span class="span-content-icon" style="background-image: url({{image}});"></span>
                             <div>
                                 <h4 class="h4-content-title">{{title}}</h4>
-                                <p class="p-content-dateup">Útima Atualização: {{dateUp}}</p>
+                                <p class="p-content-dateup">Data de Publicação: {{dateUp}}</p> {{! Útima Atualização: }}
                             </div>
                             <p class="p-content-info">{{text}}</p>
                         </div>
