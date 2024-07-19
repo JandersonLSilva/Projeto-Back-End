@@ -3,11 +3,17 @@
     margin: 0;
     padding: 0;
 }
+
+
+
 /* Importando uma fonte */
 @font-face {
     font-family: 'Source Sans Pro';
     src: url('./fonts/SourceSansPro-SemiboldIt.otf');
 }
+
+
+
 /* Estilo para o corpo do site */
 body{
     background-image: url("./background/background-image-white.jpg");
@@ -17,13 +23,23 @@ body{
     height: 100vh;
 }
 
+
+
+
 /* Estilização da barra de rolagem do Firefox */
 @-moz-document url-prefix(){
     * {
         scrollbar-width: thin;
         scrollbar-color: rgb(114, 114, 114) rgb(255, 246, 228);
     }
+
+    .div-main-contents{
+        scrollbar-width: none;
+        scrollbar-color: rgba(114, 114, 114, 0) rgba(255, 246, 228, 0);
+    }
 }
+
+
 
 /* Estilização da barra de rolagem de outros navegadores como o chrome e edge por exemplo */
 @supports (-webkit-appearance: none){
@@ -47,6 +63,8 @@ body{
 }
 
 
+
+/* Estilização do bloco de erro */
 .p-error{
     background-color: rgba(252, 74, 74, 0.322);
     color: rgba(99, 19, 19, 0.575);
@@ -62,6 +80,8 @@ body{
     cursor: pointer;
 }
 
+
+
 /* Estilos para o cabeçario do site */
 header{
     background-color: #3D5571;
@@ -69,6 +89,9 @@ header{
     width: 100%;
     height: 80px;
 }
+
+
+
 /* Estilo do icone de Menu (que abre uma aba com um menu de opçoes) */
 .div-menu{
     width: 60px;
@@ -92,8 +115,10 @@ header{
     width: 39px;
     height: 27px;
 }
-/* Estilo do icone da Logo do site: EchoCMS */
 
+
+
+/* Estilo do icone da Logo do site: EchoCMS */
 .span-logo{
     background-image: url("./images/Banner - EchoCMS.svg");
     display: block;
@@ -103,6 +128,9 @@ header{
     margin-top: 10px;
     margin-left: 20px;
 }
+
+
+
 /* Estilo do icone de Login */
 .span-login{
     background-image: url('./images/Login.svg');
@@ -120,6 +148,8 @@ header{
     background-color: #eeeeee09;
 }
 
+
+
 /* Estilo do icone de Perfil */
 .span-profile{
     background-image: url("./images/Profile.svg");
@@ -128,7 +158,7 @@ header{
     width: 47px;
     height: 44px;
     top: 17px;
-    right: 26px;
+    right: 10pxpx;
     cursor: pointer;
     user-select: none;
     z-index: 1;
@@ -141,52 +171,43 @@ header{
     background-color: #eeeeee09;
 }
 
-.window-profile{
-    z-index: 0;
-    background-color: white;
-    font-size: 10px;
-    border-radius: 0 0 0 3px;
-    filter: drop-shadow(1px 1px 10px rgb(110, 110, 110)); /* 1px 1px rgba(0, 0, 0, 0.26) */ 
-    
-    display: none;
-    position: absolute;
-    right: 0;
-    width: 100px;
-    height: 30px;
-    padding-top: 70px;
-    text-align: center;
-    
-    user-select: none;
-    cursor: pointer;
-}
-.window-profile > a{
-    text-decoration: none;
-    color: rgba(228, 47, 47, 0.849);
-}
-.window-profile > a:hover{
-    background-color: rgb(234, 234, 235);
-}
+
+
 
 /* Estilo do bloco principal*/
-.div-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.div-page{
     width: 100%;
-    height: calc(100% - 85px);
+    height: calc(100% - 80px);
+
+    background-color: rgba(255, 255, 255, 0.493);
+    
 }
-.div-main > div{
+.div-main{
     background-color: azure;
-    width: 1580px;
-    height: 660px;
+    width: 1500px;
+    height: 640px;
     border-radius: 10px;
+
 }
+
+.div-navbar-menu{
+    width: 70px;
+    height: 100vh;
+
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    
+    background-color: azure;
+}
+
+
 /* Estilo do menu do bloco principal */
 .div-main-menu{
     margin-top: 15px;
     margin-left: 20px;
     background-color: transparent;
-    width: 1540px;
+    width: 1460px;
     height: 41px;
     /* border: 1px solid #3d55719d; */
     border-radius: 6px;
@@ -195,11 +216,15 @@ header{
 .div-main-menu > a{
     text-decoration: none;
 }
+
+
+
+/* Estilização do botão de criação de conteúdo */
 .span-add-content{
     display: flex;
     width: 159px;
     height: 31px;
-    margin-top: 3px;
+    margin-top: 14px;
     background-color: transparent;
     border: 2px solid #3d55719d;
     border-radius: 6px;
@@ -225,10 +250,13 @@ header{
     margin-top: 3px;
 }
 
+
+
+/* Estilização da caixa de pesquisa */
 .div-search-content{
     width: 680px;
     height: 31px;
-    margin-top: 3px;
+    margin-top: 14px;
     margin-left: 60px;
     background-color: transparent;
     border: 2px solid #3d55719d;
@@ -268,15 +296,18 @@ header{
     color: #3d5571d7;
 }
 
+
+
+/* Estilização da caiza de filtros das páginas */
 .div-filter{
     display: flex;
-    margin-left: 172px;
+    margin-left: 90px;
 }
 .div-filter > span{
     display: flex;
     width: 130px;
     height: 31px;
-    margin-top: 3px;
+    margin-top: 14px;
     margin-left: 20px;
     background-color: transparent;
     border: 2px solid #3d55719d;
@@ -286,6 +317,10 @@ header{
     align-items: center;
     justify-content: center;
 }
+.div-filter > span:hover{
+    background-color: #74747411;
+}
+
 .div-filter > span > span{
     display: block;
     width: 23px;
@@ -302,21 +337,25 @@ header{
     font-size: 18px;
 }
 
+
+
 /* Estilo do bloco de conteudo do bloco principal */
 .div-main-contents{
     display: block;
-    width: 1540px;
-    height: 570px;
-    margin-top: 15px;
+    width: 1460px;
+    height: 540px;
+    margin-top: 30px;
     margin-left: 20px;
     background-color: transparent;
     border: 1px solid #3d55719d;
     border-radius: 6px;
     overflow: scroll;
+    
 }
 
-/* Estilos dos elementos de conteudos da Pagina */
 
+
+/* Estilos dos elementos de conteudos da Pagina */
 .div-content{
     display: flex;
     width: auto;
@@ -383,4 +422,3 @@ header{
     color: rgb(70, 70, 70);
     /* font-style: italic; */
 }
-
