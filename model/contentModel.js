@@ -19,11 +19,12 @@ module.exports = {
             contents = JSON.parse(fs.readFileSync('contents.json', 'utf8'));
             id_count = contents[contents.length - 1].id + 1;
         }
-        let dateUp = this.getDateActual();
+        let dateCreate = this.getDateActual();
         let content = {
             id: id_count,
             title: title,
-            dateUp: dateUp,
+            dateCreate: dateCreate,
+            dateUp: dateCreate,
             route: route,
             image: image,
             text: text
@@ -62,10 +63,12 @@ module.exports = {
         if(!this.contentsIsEmpty()){
             contents = JSON.parse(fs.readFileSync('contents.json', 'utf8'));
             for(const content of contents){
-                if(id === content.id)
+                if(id == content.id){
                     return content;
+                }
             }
         }
+        console.log("conteudo vazio")
         return null;
     },
     contentsIsEmpty(){
@@ -76,8 +79,49 @@ module.exports = {
             return true;
         }
         
+    },
+    deleteContentById(id){
+        if(!this.contentsIsEmpty()){
+            let index = -1;
+            contents.forEach((content, i) =>{
+                if(content.id == id)
+                    index = i; 
+            });
+            if(index != -1){
+                contents.splice(index, 1);
+                fs.writeFileSync('contents.json', JSON.stringify(contents));
+            }
+            else
+                console.log("Elemento não encontrado");
+        }
+        console.log("Conteúdo vazio, para excluir primeiramente deve existir um conteudo salvo!");
+        
+    },
+    editContentById(id, title, route, image, text){
+        if(!this.contentsIsEmpty()){
+            let flg = false;
+            contents.forEach((content) =>{
+                if(content.id == id){
+                    let dateUp = this.getDateActual();
+                    
+                    content.title = title,
+                    content.dateUp = dateUp,
+                    content.route = route,
+                    content.image = image,
+                    content.text = text
+                    
+                    flg = true;
+                }
+                
+            });
+            if(flg)
+                fs.writeFileSync('contents.json', JSON.stringify(contents));  
+            else 
+                console.log("Elemento não encontrado");
+        }
+        else
+            console.log("Conteúdo vazio, para editar, primeiramente deve existir um conteudo salvo!");
     }
-
 
 
 

@@ -5,7 +5,7 @@ const { urlencoded } = require('body-parser');
 const mustacheExpress = require("mustache-express");
 const cookieParser = require('cookie-parser');
 const engine = mustacheExpress();
-const session = require("express-session");
+const session = require("cookie-session");
 require("dotenv").config();
 
 app.use(express.urlencoded({ extended: true }));
@@ -18,9 +18,11 @@ app.set('view engine', 'mustache');
 
 app.use(cookieParser());
 
+
+
 app.use(session({
     secret: process.env.SECRET,
-    resave: false,
+    resave: true,
     saveUninitialized: false
 }));
 

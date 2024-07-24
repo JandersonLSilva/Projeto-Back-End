@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="./css/images/Logo-echoCMS.svg" type="image/icon">
-        <link rel="stylesheet" href="./css/create.css">
-        <title>Criar Conteúdo</title>
+        <link rel="shortcut icon" {{^title}}href="./css/images/Logo-echoCMS.svg"{{/title}} {{#title}}href="../css/images/Logo-echoCMS.svg"{{/title}} type="image/icon"> {{! Procurar solução melhor }}
+        <link rel="stylesheet" {{^title}}href="./css/create.css"{{/title}} {{#title}}href="../css/create.css"{{/title}}> {{! Procurar solução melhor }}
+        <title>{{titlePage}} Conteúdo</title>
     </head>
     <body>
         {{#error}}
@@ -21,19 +21,19 @@
             
         </header>
         <div class="div-main">
-            <form action="/create" method="POST">
+            <form action="{{action}}" method="POST">
                 <div class="div-form-top">
                     
                     <div class="div-top-left">
 
                         <div class="div-title">
                             <p>Titulo da Página</p>
-                            <input type="text" id="title-input" name="title" placeholder="Informe o titulo aqui" required>
+                            <input type="text" id="title-input" name="title" placeholder="Informe o titulo aqui" required {{#title}}value="{{.}}"{{/title}}>
                         </div>
                 
                         <div class="div-route">
                             <p>Link / Rota</p>
-                            <input type="text" id="route-input" name="route" placeholder="/exemplorota" required>
+                            <input type="text" id="route-input" name="route" placeholder="/exemplorota" required {{#route}}value="{{.}}"{{/route}}>
                         </div>
 
                     </div>
@@ -42,12 +42,12 @@
 
                         <div class="div-opc">
                             <span class="span-cancel"><p>Cancelar</p></span>
-                            <span class="span-pub"><span></span><p>Publicar</p></span>
+                            <span class="span-pub"><span></span><p>{{^title}}Publicar{{/title}}{{#title}}Salvar{{/title}}</p></span>
                         </div>
                         <div class="div-up-image">
                             <div class="btn-up-image"><span></span><p>Enviar Imagem</p></div>
                             
-                            <input type="url" name="image" id="url-image" value="https://">
+                            <input type="url" name="image" id="url-image" {{^image}} value="https://" {{/image}} {{#image}} value="{{.}}" {{/image}}>
                             
                         </div>
 
@@ -57,7 +57,7 @@
 
                 <div class="div-form-bottom">
                     <div><div><span>B</span></div><div><span>I</span></div><div><span>U</span></div></div>
-                    <textarea name="textPage" id="text-page"></textarea>
+                    <textarea name="textPage" id="text-page">{{text}}</textarea>
                 </div>
             </form>
         </div>

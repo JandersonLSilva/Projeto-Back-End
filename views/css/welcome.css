@@ -45,7 +45,7 @@ header{
     margin-left: 10px;
 }
 .span-login{
-    background-image: url('./images/Login.svg');
+    background-image: url('./images/Login-light.svg');
     position: absolute;
     display: block;
     width: 140px;

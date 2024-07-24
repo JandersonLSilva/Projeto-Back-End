@@ -10,7 +10,7 @@
 }
 /* Estilo para o corpo do site */
 body{
-    background-color: rgb(246, 255, 255);
+    background-image: url("./background/background-image-white.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     font-family: 'Source Sans Pro';
@@ -19,10 +19,14 @@ body{
 
 /* Estilização da barra de rolagem do Firefox */
 @-moz-document url-prefix(){
-    * {
+    *{
         scrollbar-width: thin;
         scrollbar-color: rgb(114, 114, 114) rgb(255, 246, 228);
     }
+    #text-page{
+        scrollbar-width: none;
+    }
+
 }
 
 /* Estilização da barra de rolagem de outros navegadores como o chrome e edge por exemplo */
@@ -47,6 +51,7 @@ body{
 }
 
 
+/* Estilos para o cabeçario do site */
 header{
     background-color: rgba(240, 255, 255, 0.85); /* #3D5571 */
     backdrop-filter: blur(50px); 
@@ -54,31 +59,10 @@ header{
     width: 100%;
     height: 80px;
     filter: drop-shadow(0.1px 0.1px 2px black);
-    position: relative;
-}
-/* Estilo do icone de Menu (que abre uma aba com um menu de opçoes) */
-.div-menu{
-    width: 60px;
-    height: 54px;
-    margin-top: 10px;
-    margin-left: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.div-menu:hover{
-    border-radius: 50%;
-    background-color: #eeeeee09;
+    z-index: 2;
+    position: fixed;
 }
 
-.div-menu > span{
-    background-image: url("./images/menu-dark.svg");
-    
-    display: block;
-    width: 39px;
-    height: 27px;
-}
 /* Estilo do icone da Logo do site: EchoCMS */
 
 .span-logo{
@@ -89,23 +73,6 @@ header{
     height: 60px;
     margin-top: 10px;
     margin-left: 20px;
-}
-
-/* Estilo do icone de Login */
-.span-login{
-    background-image: url('./images/Login-dark.svg');
-    position: absolute;
-    display: block;
-    width: 140px;
-    height: 46px;
-    top: 16px;
-    right: 20px;
-    cursor: pointer;
-    user-select: none;
-}
-.span-login:hover{
-    border-radius: 16px;
-    background-color: #eeeeee09;
 }
 
 /* Estilo do icone de Perfil */
@@ -155,45 +122,53 @@ header{
     background-color: rgb(234, 234, 235);
 }
 
-/* Estilização do bloco principal */
+/* Estilização do bloco principal da página */
 .div-main{
-    position: relative;
-    /* height: 900px; */
+    background-color: rgba(240, 255, 255, 0.822);
+    backdrop-filter: blur(50px);
+    border-radius: 10px;
 
-    top: 0.7px;
-    
-    padding: 15px;
+    width: 96%;
+    height: 84%;
 
-    background-color: rgba(240, 255, 255, 0.856); /* cogitar tirar */
-    backdrop-filter: blur(50px); /* cogitar tirar */
-}
-
-/* Estilização do titulo do site */
-.div-content-title{
     display: flex;
-    margin-top: 50px;
-    margin-bottom: 60px;
+    margin: auto;
+    margin-top: 6%;
+
+    align-self: center;
+    justify-self: center;
+
 }
 
-.span-content-icon{
-    display: block;
-    width: 50px;
-    height: 50px;
-
-    margin-left: 100px;
-    margin-right: 16px;
+/* Estilização do cabeçalho da tabela */
+.div-header{
+    height: 6.6%;
+    width: 100%;
     
-    border-radius: 4px;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-color: rgba(160, 185, 185, 0.26);
+    border-bottom: 2px solid #3d55719a;
+    
+    display: flex;
+}
+.div-header > span{
+    display: block;
 
+    padding: 0.6% 0;
+
+    border-right: 1px solid #3d55719a;
+    color: #3d5571;
+    text-align: center;
 }
 
-/* Estilização do bloco de texto */
+/* Estilização dos conteudos */
+.div-content{
+    display: flex;
+}
+.div-content > p, .div-content > div{
+    padding: 0.6% 0;
 
-.p-content-text{
-    margin-bottom: 20px;    
-    font-size: 18px;
-    margin-left: 100px;
-    margin-right: 100px;
+    border-right: 1px solid #3d55719a;
+    border-bottom: 1px solid #3d55719a;
+    color: #414141;
+    text-align: center;
 }

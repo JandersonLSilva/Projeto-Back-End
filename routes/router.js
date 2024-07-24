@@ -2,25 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const contentModel = require("../model/contentModel");
+const { render } = require('../app');
 
-// router.get("/", (req, res) =>{
-//     console.log(contentModel.contents());
-//     if(!req.cookies.acess)
-//         res.redirect("/welcome");
-//     else if(req.session.user)
-//         res.render("home", {login: "false"});
-//     else if(req.session.error){
-//         delete req.session.error;
-//         if(req.session.user)
-//             res.render("home", {login: "false"}, {error: "Você precisa estar logado para acessar essa opção"}); // melhorar esse sistema
-//         else
-//             res.render("home", {error: "Você precisa estar logado para acessar essa opção"}); // melhorar esse sistema
-//     }
-//     else
-//         res.render("home");
-// });
-
-// fs.writeFileSync('contents.json', "temhfjgp");
 router.get("/", (req, res) =>{
 
     if(!req.cookies.acess)
@@ -75,17 +58,17 @@ router.post('/login', (req, res)=>{
 
 
 router.get("/create", (req, res) =>{
-    // if(req.session.user){
-        res.render('create');
-    // }else{
-    //     req.session.error = true;
-    //     res.redirect("/")
-    // }
+    if(req.session.user){
+        res.render('create', {titlePage: "Criar", action: "/create"});
+    }else{
+        req.session.error = true;
+        res.redirect("/")
+    }
 });
 router.post("/create", (req, res) => {
     let {title, route, image, textPage} = req.body;
     contentModel.addContent(title, route, image, textPage);
-    res.redirect("/");
+    res.redirect("Referer");
 });
 
 
@@ -94,7 +77,7 @@ router.get("/logout", (req, res) =>{ // obs.: tratar possiveis erros
     res.redirect("/");
 });
 
-
+ 
 contentModel.getContents().forEach(content => {
     router.get(content.route, (req, res) =>{  // possivel maneira de acessar as paginas  // cogitar colocar um caminho antes
         if(req.session.user){
@@ -106,41 +89,44 @@ contentModel.getContents().forEach(content => {
 });
 
 
-// contentModel.addContent("Java Para Iniciantes - Java do Básico ao Avançado",
-//     '/javaparainiciantes',
-//     'https://photos.smugmug.com/photos/i-LjCxwSN/0/Lf5p7gr4m3R9K5KXB6GnHbm6CJVqK2bvBtzFJmftQ/Ti/i-LjCxwSN-Ti.png',
-//     'Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo. Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo.'
-// )
-// console.log(contentModel.contentsIsEmpty());
-// contentModel.addContent("C++ Para Iniciantes - C++ do Básico ao Avançado",
-//     '/cppparainiciantes',
-//     'https://photos.smugmug.com/photos/i-LjCxwSN/0/Lf5p7gr4m3R9K5KXB6GnHbm6CJVqK2bvBtzFJmftQ/Ti/i-LjCxwSN-Ti.png',
-//     'Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo. Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo.'
-// )
-// contentModel.addContent('','','','')
-// contentModel.addContent('','','','')
-// contentModel.getDateActual();
-// console.log(contentModel.contents());
-// console.log(contentModel.searchContent("Cpp"));
+router.get("/managment", (req, res) => {
+    if(req.session.user){
+        res.render("managment", {content: contentModel.getContents()});
+    }else
+        res.redirect("/"); /* lembrar de tratar o erro corretamente */
+});
 
+router.get("/delete/:id", (req, res) => {
+    let { id } = req.params;
+    if(req.session.user){
+        contentModel.deleteContentById(id);
+    }
+    let previousPage = req.get('Referer');
+    res.redirect(previousPage); /* lembrar de tratar o erro corretamente */
+});
 
+router.get("/edit/:id", (req, res) => {
+    let { id } = req.params;
+    if(req.session.user){
+        res.render('create', {
+            titlePage: "Editar",
+            action: "/edit/"+id,
+            title: contentModel.getContentById(id).title, 
+            route: contentModel.getContentById(id).route,
+            image: contentModel.getContentById(id).image,
+            text: contentModel.getContentById(id).text
+        })
+    }
+    else{
+        res.send("Voçê precisa está logado primeiro")
+    }
+});
 
+router.post("/edit/:id", (req, res) =>{
+    let { id } = req.params;
+    let { title, route, image, textPage } = req.body;
+    contentModel.editContentById(id, title, route, image, textPage);
+    res.redirect("/managment");
+});
 
-
-// const temp =  JSON.stringify([
-//     {
-//       id: 0,
-//       title: 'Java Para Iniciantes - Java do Básico ao Avançado',
-//       dateUp: '07/07/2024',
-//       route: '/javaparainiciantes',
-//       image: 'https://photos.smugmug.com/photos/i-LjCxwSN/0/Lf5p7gr4m3R9K5KXB6GnHbm6CJVqK2bvBtzFJmftQ/Ti/i-LjCxwSN-Ti.png',
-//       text: 'Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo. Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo.\r\n' +
-//         '\r\n' +
-//         'Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo. Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo.\r\n' +
-//         '\r\n' +
-//         'Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo. Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo.\r\n' +
-//         '\r\n' +
-//         'Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo. Nessa página você aprendera sobre conceitos basicos de programação como tipos de dados, manipulação de arrays e strings, variáveis, operadores e estruturas de controle. Por último você verá um pouco sobre conceitos de Programação Orientada a Objetos como: Encapsulamento, herança e polimorfismo.'
-//     }
-//   ])+'\n';
 module.exports = router;

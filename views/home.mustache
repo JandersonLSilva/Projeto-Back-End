@@ -13,30 +13,24 @@
         {{/error}}
         
         <header>
-            <div class="div-menu"><span></span></div>
             <a href="/"><span class="span-logo"></span></a>
+            {{#login}}<a href="/managment"><span class="span-managment">Gerenciar</span></a>{{/login}}
+
             {{^login}}
                 <a href="/login"><span class="span-login"></span></a>
             {{/login}}
-            
+            {{#login}}
             <span class="span-profile"></span>
+            <div class="window-profile"><a href="/logout"><span>Sair da Conta</a></span></div>
+            
+            
+            {{/login}}
         </header>
-        
-        <div class="div-navbar-menu">
-
-        
-        </div>
-        
-        <div class="div-page">
-            <div class="div-main">
+        <div class="div-main">
+            <div>
                 <div class="div-main-menu">
                     <a href="/create"><span class="span-add-content"><span></span><p>Criar Pagina</p></span></a>
-                    <div class="div-search-content"><span></span><input type="text" name="search" id="div-search-input" placeholder="Pesquisa"></div>
-                    <div class="div-filter">
-                        <span class="span-filter-recent"><p>Recentes</p><span></span></span>
-                        <span class="span-filter-nome"><p>Nome</p><span></span></span>
-                        <span class="span-filter-popular"><p>Popular</p><span></span></span>
-                    </div>
+                    <div class="div-search-content"><span></span><input type="text" name="search" id="input-search" placeholder="Pesquisa"></div>
                 </div>
                 <div class="div-main-contents">
                     {{#contents}}
@@ -44,7 +38,7 @@
                             <span class="span-content-icon" style="background-image: url({{image}});"></span>
                             <div>
                                 <h4 class="h4-content-title">{{title}}</h4>
-                                <p class="p-content-dateup">Data de Publicação: {{dateUp}}</p> {{! Útima Atualização: }}
+                                <p class="p-content-dateup">Última Atualização: {{dateUp}}</p> {{! Útima Atualização: }}
                             </div>
                             <p class="p-content-info">{{text}}</p>
                         </div>
@@ -52,48 +46,53 @@
 
                 </div>
             </div>
+            
         </div>
         <script>
-            {{! document.addEventListener("DOMContentLoaded", function() { }}
-                let contents = document.querySelectorAll('.div-content');
+            let contents = document.querySelectorAll('.div-content');
 
-                contents.forEach(content => {
-                    content.addEventListener('click', () => {
-                        let route = content.getAttribute('data-route');
-                        window.location.href = route;
-                    });
+            contents.forEach(content => {
+                content.addEventListener('click', () => {
+                    let route = content.getAttribute('data-route');
+                    window.location.href = route;
                 });
+            });
 
-                if(document.querySelector(".span-profile")){
-                    let spanProfile = document.querySelector(".span-profile");
-                    spanProfile.addEventListener("click", () => {
-                        let windowP = document.querySelector(".window-profile");
-                        windowP.style.display = (windowP.style.display == 'block') ? 'none' : 'block';
+            if(document.querySelector(".span-profile")){
+                let spanProfile = document.querySelector(".span-profile");
+                spanProfile.addEventListener("click", () => {
+                    let windowP = document.querySelector(".window-profile");
+                    windowP.style.display = (windowP.style.display == 'block') ? 'none' : 'block';
 
-                        console.log(spanProfile.classList);
-                        if(spanProfile.classList.contains("span-profile-dark")){
-                            console.log("Removing class");
-                            spanProfile.classList.remove("span-profile-dark");
-                        }
-                        else{
-                            console.log("Adding class");
-                            spanProfile.classList.add("span-profile-dark")
-                        }
-                        console.log(spanProfile.classList);
-                    });
-                }
+                    console.log(spanProfile.classList);
+                    if(spanProfile.classList.contains("span-profile-dark")){
+                        console.log("Removing class");
+                        spanProfile.classList.remove("span-profile-dark");
+                    }
+                    else{
+                        console.log("Adding class");
+                        spanProfile.classList.add("span-profile-dark")
+                    }
+                    console.log(spanProfile.classList);
+                });
+            }
 
-                if( document.querySelector(".p-error>span")){
-                    let spanError = document.querySelector(".p-error>span");
-                    spanError.addEventListener('click', () => {
-                        window.location.href = '/';
-                    });
-                    let spanLogin = document.querySelector(".span-login");
-                    spanLogin.style.top = "44px";
-                    console.log(spanLogin.style.top);
-                }
+            if( document.querySelector(".p-error>span")){
+                let spanError = document.querySelector(".p-error>span");
+                spanError.addEventListener('click', () => {
+                    window.location.href = '/';
+                });
+                let spanLogin = document.querySelector(".span-login");
+                spanLogin.style.top = "44px";
+                console.log(spanLogin.style.top);
+            }
 
-            {{! }); }}
+
+            let inputSearch = document.querySelector("#input-search");
+            let spanSearch = document.querySelector(".div-search-content > span")
+            spanSearch.addEventListener('click', () => {
+                window.location.href = '/search?q='+inputSearch.value;
+            });
         </script>
     </body>
 </html>
