@@ -7,7 +7,8 @@ const auth = require("../middlewares/checkSessionAuth");
 
 router.get("/search", require("../controllers/search"));
 
-router.get("/", require("../controllers/home"));
+const home = require("../controllers/home")
+router.get("/", home.verifyAuth, home.prepareData, home.catchSearch, home.get);
 
 const account = require("../controllers/account")
 router.get('/login', account.loginGet);

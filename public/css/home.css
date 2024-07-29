@@ -21,7 +21,7 @@ body{
 @-moz-document url-prefix(){
     * {
         scrollbar-width: thin;
-        scrollbar-color: rgb(114, 114, 114) rgb(255, 246, 228);
+        scrollbar-color: rgb(114, 114, 114) azure;
     }
 }
 
@@ -34,14 +34,14 @@ body{
         display: none;
     }
     *::-webkit-scrollbar-track {
-        background: white;
+        background: azure;
         padding: 2px;
     }
     
     *::-webkit-scrollbar-thumb {
         background-color: #3d55719a;
         border-radius: 20px;
-        border: 3px solid white;
+        border: 3px solid azure;
         width: 6px;
     }
 }
