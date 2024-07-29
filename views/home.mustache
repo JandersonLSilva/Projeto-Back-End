@@ -33,7 +33,7 @@
                     <div class="div-search-content"><span></span><input type="text" name="search" id="input-search" placeholder="Pesquisa"></div>
                 </div>
                 <div class="div-main-contents">
-                    {{#contents}}
+                    {{#loading}}
                         <div class="div-content" data-route={{route}}>
                             <span class="span-content-icon" style="background-image: url({{image}});"></span>
                             <div>
@@ -42,7 +42,7 @@
                             </div>
                             <p class="p-content-info">{{text}}</p>
                         </div>
-                    {{/contents}}
+                    {{/loading}}
 
                 </div>
             </div>
