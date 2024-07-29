@@ -1,27 +1,11 @@
-let id_count = 0;
-let contents = [];
-
 const fs = require('fs');
-
+const getDateActual = require("../utils/getDateActual");
+const getFilesByDirectory = require("../utils/getFilesByDirectory")
 module.exports = {
-    getDateActual(){
-        const date = new Date();
-
-        let day = String(date.getDate()).padStart(2, '0');
-        let month = String(date.getMonth() + 1).padStart(2, '0');
-        let year = String(date.getFullYear());
-
-        let today = `${day}/${month}/${year}`
-        return today;
-    },
-    addContent(title, route, image, text){
-        if(!this.contentsIsEmpty()){
-            contents = JSON.parse(fs.readFileSync('contents.json', 'utf8'));
-            id_count = contents[contents.length - 1].id + 1;
-        }
-        let dateCreate = this.getDateActual();
+    addContent(id, title, route, image, text){
+        let dateCreate = getDateActual();
         let content = {
-            id: id_count,
+            id: id,
             title: title,
             dateCreate: dateCreate,
             dateUp: dateCreate,
@@ -29,98 +13,66 @@ module.exports = {
             image: image,
             text: text
         }
-        
-        contents.push(content);
-        // const temp =  JSON.stringify(contents)+'\n';
-        fs.writeFileSync('contents.json', JSON.stringify(contents));        
+        fs.writeFileSync(`data/${content.route.replace('/', '')}.json`, JSON.stringify(content));    
     },
-    searchContent(search){
-        let resSearch = [];
-        let j = 0;
-        if(!this.contentsIsEmpty()){
-            contents = JSON.parse(fs.readFileSync('contents.json', 'utf8'));
-            for(const content of contents){
-                if(
-                    content.title.toUpperCase().includes(search.toUpperCase())||
-                    content.route.toUpperCase().includes(search.toUpperCase())||
-                    content.text.toUpperCase().includes(search.toUpperCase())
-                ){
-                    resSearch.push(content);
-                }
-            }
-        }
-        return resSearch;
-    },
-    getContents(){
-        // console.log(!this.contentsIsEmpty());
-        if(!this.contentsIsEmpty())
-            contents = JSON.parse(fs.readFileSync('contents.json', 'utf8'));
-        // let lenght = contents.length
-        // console.log(contents.slice(lenght-1)[0].id);
+    getContents: async function(){
+        let files = await getFilesByDirectory("./data");
+        let contents = [];
+        files.forEach((file)=>{
+            contents.push(JSON.parse(fs.readFileSync("./data/"+file, 'utf8')));
+        })
         return contents;
     },
-    getContentById(id){
-        if(!this.contentsIsEmpty()){
-            contents = JSON.parse(fs.readFileSync('contents.json', 'utf8'));
-            for(const content of contents){
-                if(id == content.id){
-                    return content;
-                }
-            }
+    searchContent: async function(search){
+        let contents = await this.getContents();
+        let resSearch = [];
+
+        contents.forEach((content)=>{
+            if(
+                content.title.normalize("NFC").includes(search.normalize("NFC"))||
+                content.route.normalize("NFC").includes(search.normalize("NFC"))||
+                content.text.normalize("NFC").includes(search.normalize("NFC"))
+            )
+                resSearch.push(content);
+        });
+        
+        return resSearch;
+    },
+    getContentById: async function(id){
+        let contents = await this.getContents();
+        for(const content of contents){
+            if(id == content.id)
+                return content;
         }
-        console.log("conteudo vazio")
         return null;
     },
-    contentsIsEmpty(){
-        try {
-            contents = JSON.parse(fs.readFileSync('contents.json', 'utf8'));
-            return false;
-        } catch (error) {
-            return true;
-        }
-        
+    contentsIsEmpty: async function(){
+        return((await this.getContents()) == []);
     },
-    deleteContentById(id){
-        if(!this.contentsIsEmpty()){
-            let index = -1;
-            contents.forEach((content, i) =>{
-                if(content.id == id)
-                    index = i; 
-            });
-            if(index != -1){
-                contents.splice(index, 1);
-                fs.writeFileSync('contents.json', JSON.stringify(contents));
-            }
-            else
-                console.log("Elemento não encontrado");
-        }
-        console.log("Conteúdo vazio, para excluir primeiramente deve existir um conteudo salvo!");
-        
+    deleteContentById: async function(id){
+        let files = await getFilesByDirectory("./data");
+        files.forEach((file)=>{
+            let idFile = JSON.parse(fs.readFileSync("./data/"+file, 'utf8')).id;
+            if(id == idFile)
+                fs.unlinkSync("./data/"+file);
+        })
     },
-    editContentById(id, title, route, image, text){
-        if(!this.contentsIsEmpty()){
-            let flg = false;
-            contents.forEach((content) =>{
-                if(content.id == id){
-                    let dateUp = this.getDateActual();
-                    
-                    content.title = title,
-                    content.dateUp = dateUp,
-                    content.route = route,
-                    content.image = image,
-                    content.text = text
-                    
-                    flg = true;
-                }
+    editContentById: async function(id, title, image, text){
+        let contents = await this.getContents();
+        contents.forEach((content) =>{
+            if(content.id == id){
+                let dateUp = getDateActual();
                 
-            });
-            if(flg)
-                fs.writeFileSync('contents.json', JSON.stringify(contents));  
-            else 
-                console.log("Elemento não encontrado");
-        }
-        else
-            console.log("Conteúdo vazio, para editar, primeiramente deve existir um conteudo salvo!");
+                content.title = title,
+                content.dateUp = dateUp,
+                content.image = image,
+                content.text = text
+                
+                fs.writeFileSync(`data/${content.route.replace('/', '')}.json`, JSON.stringify(content));
+            }
+            
+        });
+    
     }
 
 

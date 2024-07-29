@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="./css/images/Logo-echoCMS.svg" type="image/icon">
-        <link rel="stylesheet" href="./css/home.css">
+        <link rel="shortcut icon" href="/css/images/Logo-echoCMS.svg" type="image/icon">
+        <link rel="stylesheet" href="/css/home.css">
         <title>EchoCMS</title>
     </head>
     <body>
@@ -54,7 +54,7 @@
             contents.forEach(content => {
                 content.addEventListener('click', () => {
                     let route = content.getAttribute('data-route');
-                    window.location.href = route;
+                    window.location.href = "/content"+route;
                 });
             });
 
@@ -64,13 +64,10 @@
                     let windowP = document.querySelector(".window-profile");
                     windowP.style.display = (windowP.style.display == 'block') ? 'none' : 'block';
 
-                    console.log(spanProfile.classList);
                     if(spanProfile.classList.contains("span-profile-dark")){
-                        console.log("Removing class");
                         spanProfile.classList.remove("span-profile-dark");
                     }
                     else{
-                        console.log("Adding class");
                         spanProfile.classList.add("span-profile-dark")
                     }
                     console.log(spanProfile.classList);

@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" {{^title}}href="./css/images/Logo-echoCMS.svg"{{/title}} {{#title}}href="../css/images/Logo-echoCMS.svg"{{/title}} type="image/icon"> {{! Procurar solução melhor }}
-        <link rel="stylesheet" {{^title}}href="./css/create.css"{{/title}} {{#title}}href="../css/create.css"{{/title}}> {{! Procurar solução melhor }}
+        <link rel="shortcut icon" href="/css/images/Logo-echoCMS.svg" type="image/icon"> {{! Procurar solução melhor }}
+        <link rel="stylesheet" href="/css/create.css"> {{! Procurar solução melhor }}
         <title>{{titlePage}} Conteúdo</title>
     </head>
     <body>
@@ -30,12 +30,12 @@
                             <p>Titulo da Página</p>
                             <input type="text" id="title-input" name="title" placeholder="Informe o titulo aqui" required {{#title}}value="{{.}}"{{/title}}>
                         </div>
-                
                         <div class="div-route">
+                        {{^title}}
                             <p>Link / Rota</p>
                             <input type="text" id="route-input" name="route" placeholder="/exemplorota" required {{#route}}value="{{.}}"{{/route}}>
+                        {{/title}}
                         </div>
-
                     </div>
 
                     <div class="div-top-right">

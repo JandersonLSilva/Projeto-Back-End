@@ -1,3 +1,7 @@
 node_modules
 .env
 teste.html
+teste.js
+controllers.js
+errors
+schemas
