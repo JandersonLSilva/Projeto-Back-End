@@ -1,10 +1,8 @@
 const contentModel = require("../model/contentModel");
 
 module.exports = {
-
     verifyAuth : function(req, res, next){
-        console.log("Auth");
-        if(!req.session.user){
+        if(req.session.error){
             res.locals.login = undefined;
             res.locals.error = req.session.error;
             delete req.session.error;
@@ -13,8 +11,14 @@ module.exports = {
         }
         next();
     },
+    verifyError: function(req, res, next){
+        if(req.session.errSearch){
+            res.locals.error = req.session.errSearch;
+            delete req.session.errSearch;
+        }
+        next();
+    },
     prepareData : async function(req, res, next){
-        console.log("Data");
         try {
             res.locals.loading = (await contentModel.getContents()).reverse();
         } catch (err) {
@@ -23,7 +27,6 @@ module.exports = {
         next()
     },
     catchSearch : function(req, res, next){
-        console.log("Search");
         if(req.session.search){
             res.locals.loading = req.session.search.reverse();
             delete req.session.search;
@@ -31,7 +34,6 @@ module.exports = {
         next();
     },
     get : async function(req, res, next){
-        console.log("Home");
         res.render('home');
     }
 }

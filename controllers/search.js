@@ -5,6 +5,6 @@ module.exports = async function(req, res){
             let contentsSearch = await contentModel.searchContent(query)
             req.session.search = contentsSearch;
         }else
-            console.log("Não é possivel buscar esse valor!!!");
+            req.session.errSearch = "Não foi possível buscar esse valor, por favor tente um valor válido";
         res.redirect('/');
     };

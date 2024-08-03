@@ -27,12 +27,14 @@
                     <div class="div-top-left">
 
                         <div class="div-title">
-                            <p>Titulo da Página</p>
+                            <p class="p-error">{{errTitle}} </p>
+                            <p class="p-input">Titulo da Página</p>
                             <input type="text" id="title-input" name="title" placeholder="Informe o titulo aqui" required {{#title}}value="{{.}}"{{/title}}>
                         </div>
                         <div class="div-route">
                         {{^title}}
-                            <p>Link / Rota</p>
+                            <p class="p-error">{{errRoute}} </p>
+                            <p class="p-input">Link / Rota</p>
                             <input type="text" id="route-input" name="route" placeholder="/exemplorota" required {{#route}}value="{{.}}"{{/route}}>
                         {{/title}}
                         </div>
@@ -44,6 +46,7 @@
                             <span class="span-cancel"><p>Cancelar</p></span>
                             <span class="span-pub"><span></span><p>{{^title}}Publicar{{/title}}{{#title}}Salvar{{/title}}</p></span>
                         </div>
+                        <p class="p-error">{{errImage}} </p>
                         <div class="div-up-image">
                             <div class="btn-up-image"><span></span><p>Enviar Imagem</p></div>
                             
@@ -55,8 +58,8 @@
 
                 </div>
 
+                <p class="p-error-text">{{#errText}}{{.}}{{/errText}}</p>
                 <div class="div-form-bottom">
-                    <div><div><span>B</span></div><div><span>I</span></div><div><span>U</span></div></div>
                     <textarea name="textPage" id="text-page">{{text}}</textarea>
                 </div>
             </form>

@@ -8,7 +8,7 @@ const auth = require("../middlewares/checkSessionAuth");
 router.get("/search", require("../controllers/search"));
 
 const home = require("../controllers/home")
-router.get("/", home.verifyAuth, home.prepareData, home.catchSearch, home.get);
+router.get("/", home.verifyError, home.verifyAuth, home.prepareData, home.catchSearch, home.get);
 
 const account = require("../controllers/account")
 router.get('/login', account.loginGet);
@@ -16,10 +16,11 @@ router.post('/login', account.loginPost);
 
 router.get("/logout", account.logout);
 
+const validSchema = require("../middlewares/validSchemas");
 const idCount = require("../middlewares/idCount");
 const create = require("../controllers/create")
 router.get("/create", auth, create.get);
-router.post("/create", idCount, create.post);
+router.post("/create", idCount, validSchema, create.post);
 
 router.get("/content/:route", require("../controllers/generic"));
 
