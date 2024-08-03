@@ -1,20 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
     <head>
         <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./css/Logo-echoCMS.svg" type="image/icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="/css/images/Logo-echoCMS.svg" type="image/icon">
+        <link rel="stylesheet" href="/css/home.css">
         <title>EchoCMS</title>
     </head>
+    <body>
+        {{#error}}
+        <p class="p-error">{{error}}<span>×</span></p>
+        {{/error}}
+        
         <header>
-            <h1>Bem Vindo a Home</h1>
+            <a href="/"><span class="span-logo"></span></a>
+            {{#login}}<a href="/managment"><span class="span-managment">Gerenciar</span></a>{{/login}}
+
             {{^login}}
-            <p>Fazer Login</p>
+                <a href="/login"><span class="span-login"></span></a>
+            {{/login}}
+            {{#login}}
+            <span class="span-profile"></span>
+            <div class="window-profile"><a href="/logout"><span>Sair da Conta</a></span></div>
+            
+            
             {{/login}}
         </header>
-        <div>
-            <p>Conteudo Home</p>
+        <div class="div-main">
+            <div>
+                <div class="div-main-menu">
+                    <a href="/create"><span class="span-add-content"><span></span><p>Criar Pagina</p></span></a>
+                    <div class="div-search-content"><span></span><input type="text" name="search" id="input-search" placeholder="Pesquisa"></div>
+                </div>
+                <div class="div-main-contents">
+                    {{#loading}}
+                        <div class="div-content" data-route={{route}}>
+                            <span class="span-content-icon" style="background-image: url({{image}});"></span>
+                            <div>
+                                <h4 class="h4-content-title">{{title}}</h4>
+                                <p class="p-content-dateup">Última Atualização: {{dateUp}}</p>
+                            </div>
+                            <p class="p-content-info">{{{text}}}</p>
+                        </div>
+                    {{/loading}}
+
+                </div>
+            </div>
+            
         </div>
-        
+        <script>
+            let contents = document.querySelectorAll('.div-content');
+
+            contents.forEach(content => {
+                content.addEventListener('click', () => {
+                    let route = content.getAttribute('data-route');
+                    window.location.href = "/content"+route;
+                });
+            });
+
+            if(document.querySelector(".span-profile")){
+                let spanProfile = document.querySelector(".span-profile");
+                spanProfile.addEventListener("click", () => {
+                    let windowP = document.querySelector(".window-profile");
+                    windowP.style.display = (windowP.style.display == 'block') ? 'none' : 'block';
+
+                    if(spanProfile.classList.contains("span-profile-dark")){
+                        spanProfile.classList.remove("span-profile-dark");
+                    }
+                    else{
+                        spanProfile.classList.add("span-profile-dark")
+                    }
+                    console.log(spanProfile.classList);
+                });
+            }
+
+            if( document.querySelector(".p-error>span")){
+                let spanError = document.querySelector(".p-error>span");
+                spanError.addEventListener('click', () => {
+                    window.location.href = '/';
+                });
+                let spanLogin = document.querySelector(".span-login");
+                spanLogin.style.top = "44px";
+                console.log(spanLogin.style.top);
+            }
+
+
+            let inputSearch = document.querySelector("#input-search");
+            let spanSearch = document.querySelector(".div-search-content > span")
+            spanSearch.addEventListener('click', () => {
+                window.location.href = '/search?q='+inputSearch.value;
+            });
+        </script>
     </body>
 </html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="/css/images/Logo-echoCMS.svg" type="image/icon">
+        <link rel="stylesheet" href="/css/generic.css">
+        <title>{{title}}</title>
+    </head>
+    <body>
+        <header>
+            <div class="div-menu"><span></span></div>
+            <a href="/"><span class="span-logo"></span></a>
+            {{^login}}
+                <a href="/login"><span class="span-login"></span></a>
+            {{/login}}
+            
+            {{#login}}
+                <span class="span-profile"></span>
+                <div class="window-profile"><a href="/logout"><span>Sair da Conta</a></span></div>
+            
+            
+            {{/login}}
+        </header>
+        <div class="div-main">
+            <div class="div-content-title">
+                <span class="span-content-icon" style="background-image: url({{image}});"></span><h1 class="h1-content-title">{{title}}</h1>
+            </div>
+            {{#text}}
+                <p class="p-content-text" style="white-space: pre-wrap;">{{{text}}}</p>    
+            {{/text}}
+        </div>
+        <script>
+            if(document.querySelector(".span-profile")){
+                    let spanProfile = document.querySelector(".span-profile");
+                    spanProfile.addEventListener("click", () => {
+                        let windowP = document.querySelector(".window-profile");
+                        windowP.style.display = (windowP.style.display == 'block') ? 'none' : 'block';
+
+                        console.log(spanProfile.classList);
+                        if(spanProfile.classList.contains("span-profile-dark")){
+                            console.log("Removing class");
+                            spanProfile.classList.remove("span-profile-dark");
+                        }
+                        else{
+                            console.log("Adding class");
+                            spanProfile.classList.add("span-profile-dark")
+                        }
+                        console.log(spanProfile.classList);
+                    });
+                }
+        </script>
+    </body>
+</html>

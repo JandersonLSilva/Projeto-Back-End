@@ -1,0 +1,357 @@
+/* deixando por padrão as margens e preenchiemento de todas os elementos como 0 */
+*{
+    margin: 0;
+    padding: 0;
+}
+/* Importando uma fonte */
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('./fonts/SourceSansPro-SemiboldIt.otf');
+}
+/* Estilo para o corpo do site */
+body{
+    background-image: url("./background/background-image-white.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Source Sans Pro';
+    height: 100vh;
+}
+
+/* Estilização da barra de rolagem do Firefox */
+@-moz-document url-prefix(){
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: rgb(114, 114, 114) azure;
+    }
+}
+
+/* Estilização da barra de rolagem de outros navegadores como o chrome e edge por exemplo */
+@supports (-webkit-appearance: none){
+    *::-webkit-scrollbar {
+        width: 14px;
+    }
+    *::-webkit-scrollbar-button{
+        display: none;
+    }
+    *::-webkit-scrollbar-track {
+        background: azure;
+        padding: 2px;
+    }
+    
+    *::-webkit-scrollbar-thumb {
+        background-color: #3d55719a;
+        border-radius: 20px;
+        border: 3px solid azure;
+        width: 6px;
+    }
+}
+
+
+.p-error{
+    background-color: rgba(252, 74, 74, 0.322);
+    color: rgba(99, 19, 19, 0.575);
+    font-size: 14px;
+    width: calc (100% - 10px);  
+    height: 24px;
+    padding-left: 10px;
+    padding-top: 0.3%;
+}
+.p-error > span{
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Estilos para o cabeçario do site */
+header{
+    background-color: #3D5571;
+    display: flex;
+    width: 100%;
+    height: 80px;
+}
+
+/* Estilo do icone da Logo do site: EchoCMS */
+.span-logo{
+    background-image: url("./images/Banner - EchoCMS.svg");
+    display: block;
+    position: relative;
+    width: 191px;
+    height: 60px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+a{
+    text-decoration: none;
+}
+
+/* Estilo para o botão de redireconamento para a rota /managment */
+.span-managment{
+    position: absolute;
+    top: 3.6%;
+    right: 7%;
+
+    display: block;
+    width: 8%;
+    height: 3.4%;
+
+    color: #254161;
+    font-size: 110%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 6% / 28%;
+    background-color: rgba(240, 255, 255, 0.514);
+}
+.span-managment:hover{
+    background-color: rgba(240, 255, 255, 0.363);
+}
+
+/* Estilo do icone de Login */
+.span-login{
+    background-image: url('./images/Login-light.svg');
+    position: absolute;
+    display: block;
+    width: 140px;
+    height: 46px;
+    top: 16px;
+    right: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+.span-login:hover{
+    border-radius: 16px;
+    background-color: #eeeeee09;
+}
+
+/* Estilo do icone de Perfil */
+.span-profile{
+    background-image: url("./images/Profile.svg");
+    position: absolute;
+    display: block;
+    width: 47px;
+    height: 44px;
+    top: 17px;
+    right: 26px;
+    cursor: pointer;
+    user-select: none;
+    z-index: 1;
+}
+.span-profile-dark{
+    background-image: url("./images/Profile-dark.svg");
+}
+.span-profile:hover{
+    border-radius: 50%;
+    background-color: #eeeeee09;
+}
+
+.window-profile{
+    z-index: 0;
+    background-color: white;
+    font-size: 10px;
+    border-radius: 0 0 0 3px;
+    filter: drop-shadow(1px 1px 10px rgb(110, 110, 110)); /* 1px 1px rgba(0, 0, 0, 0.26) */ 
+    
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 100px;
+    height: 30px;
+    padding-top: 70px;
+    text-align: center;
+    
+    user-select: none;
+    cursor: pointer;
+}
+.window-profile > a{
+    text-decoration: none;
+    color: rgba(228, 47, 47, 0.849);
+}
+.window-profile > a:hover{
+    background-color: rgb(234, 234, 235);
+}
+
+/* Estilo do bloco principal*/
+.div-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 85px);
+}
+.div-main > div{
+    background-color: azure;
+    width: 1580px;
+    height: 660px;
+    border-radius: 10px;
+}
+/* Estilo do menu do bloco principal */
+.div-main-menu{
+    margin-top: 15px;
+    margin-left: 20px;
+    background-color: transparent;
+    width: 1540px;
+    height: 41px;
+    /* border: 1px solid #3d55719d; */
+    border-radius: 6px;
+    display: flex;
+}
+.div-main-menu > a{
+    text-decoration: none;
+}
+.span-add-content{
+    display: flex;
+    width: 159px;
+    height: 31px;
+    margin-top: 3px;
+    background-color: transparent;
+    border: 2px solid #3d55719d;
+    border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+}
+.span-add-content:hover{
+    background-color: #74747411;
+}
+
+.span-add-content > span {
+    display: block;
+    width: 19px;
+    height: 19px;
+    background-image: url("./images/add.svg");
+    margin-top: 5px;
+    margin-left: 12px;
+}
+.span-add-content > p {
+    color: #3d5571d7;
+    font-size: 18px;
+    margin-left: 8px;
+    margin-top: 3px;
+}
+
+.div-search-content{
+    width: 680px;
+    height: 31px;
+    margin-top: 3px;
+    margin-left: 694px;
+    background-color: transparent;
+    border: 2px solid #3d55719d;
+    border-radius: 6px;
+    display: flex;
+    cursor: pointer;
+}
+.div-search-content > span{
+    background-image: url("./images/lupa.svg");
+    display: block;
+    width: 29px;
+    height: 29px;
+    margin-top: 2px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.div-search-content > span:hover{
+    border-radius: 50%;
+    background-color: #74747411;
+}
+#input-search{
+    background-color: transparent;
+    border-style: none;
+    margin-left: 10px;
+    width: 631px;
+    height: 32px;
+    font-family: "Source Sans Pro";
+    font-size: 16px; 
+}
+#input-search:focus{
+    outline: none;
+    /* box-shadow: 2px 2px black; */
+}
+#input-search::placeholder{
+    font-family: "Source Sans Pro";
+    font-size: 16px;
+    color: #3d5571d7;
+}
+
+
+/* Estilo do bloco de conteudo do bloco principal */
+.div-main-contents{
+    display: block;
+    width: 1540px;
+    height: 570px;
+    margin-top: 15px;
+    margin-left: 20px;
+    background-color: transparent;
+    border: 1px solid #3d55719d;
+    border-radius: 6px;
+    overflow: scroll;
+}
+
+/* Estilos dos elementos de conteudos da Pagina */
+
+.div-content{
+    display: flex;
+    width: auto;
+    height: 80px;
+    padding: 10px;
+    cursor: pointer;
+    align-items: center;
+}
+.div-content:hover{
+    background-color: #74747411;
+}
+.span-content-icon{
+    display: block;
+    width: 50px;
+    height: 50px;
+
+    margin-left: 16px;
+    margin-right: 16px;
+    
+    border-radius: 4px;
+    background-size: cover;
+    background-repeat: none;
+
+}
+.h4-content-title{
+    width: 400px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    margin-bottom: 8px;
+
+    color: rgb(70, 70, 70);
+}
+.p-content-dateup{
+    margin-left: 10px;
+    color: #3D5571;
+}
+.p-content-info{
+    width: 982px;
+    height: 60px;
+
+    margin-left: 40px;
+
+    text-overflow: ellipsis;
+
+    /* teste */
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+
+    -webkit-line-clamp: 3;
+    -moz-line-clamp: 3;
+    line-clamp: 3;
+
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+    /* ***** */
+    white-space: normal;
+    overflow: hidden;
+
+    color: rgb(70, 70, 70);
+    /* font-style: italic; */
+}
+

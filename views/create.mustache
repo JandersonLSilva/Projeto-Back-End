@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="/css/images/Logo-echoCMS.svg" type="image/icon"> {{! Procurar solução melhor }}
+        <link rel="stylesheet" href="/css/create.css"> {{! Procurar solução melhor }}
+        <title>{{titlePage}} Conteúdo</title>
+    </head>
+    <body>
+        {{#error}}
+        <p class="p-error">{{error}}<span>×</span></p>
+        {{/error}}
+        
+        <header>
+            <div class="div-menu"><span></span></div>
+            <a href="/"><span class="span-logo"></span></a>
+            <span class="span-profile"></span>
+            
+            <div class="window-profile"><a href="/logout"><span>Sair da Conta</a></span></div>
+            
+        </header>
+        <div class="div-main">
+            <form action="{{action}}" method="POST">
+                <div class="div-form-top">
+                    
+                    <div class="div-top-left">
+
+                        <div class="div-title">
+                            <p class="p-error">{{errTitle}} </p>
+                            <p class="p-input">Titulo da Página</p>
+                            <input type="text" id="title-input" name="title" placeholder="Informe o titulo aqui" required {{#title}}value="{{.}}"{{/title}}>
+                        </div>
+                        <div class="div-route">
+                        {{^title}}
+                            <p class="p-error">{{errRoute}} </p>
+                            <p class="p-input">Link / Rota</p>
+                            <input type="text" id="route-input" name="route" placeholder="/exemplorota" required {{#route}}value="{{.}}"{{/route}}>
+                        {{/title}}
+                        </div>
+                    </div>
+
+                    <div class="div-top-right">
+
+                        <div class="div-opc">
+                            <span class="span-cancel"><p>Cancelar</p></span>
+                            <span class="span-pub"><span></span><p>{{^title}}Publicar{{/title}}{{#title}}Salvar{{/title}}</p></span>
+                        </div>
+                        <p class="p-error">{{errImage}} </p>
+                        <div class="div-up-image">
+                            <div class="btn-up-image"><span></span><p>Enviar Imagem</p></div>
+                            
+                            <input type="url" name="image" id="url-image" {{^image}} value="https://" {{/image}} {{#image}} value="{{.}}" {{/image}}>
+                            
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <p class="p-error-text">{{#errText}}{{.}}{{/errText}}</p>
+                <div class="div-form-bottom">
+                    <textarea name="textPage" id="text-page">{{text}}</textarea>
+                </div>
+            </form>
+        </div>
+        <script>
+            {{! document.addEventListener("DOMContentLoaded", function() { }}
+                let contents = document.querySelectorAll('.div-content');
+
+                contents.forEach(content => {
+                    content.addEventListener('click', () => {
+                        let route = content.getAttribute('data-route');
+                        window.location.href = route;
+                    });
+                });
+
+                let spanProfile = document.querySelector(".span-profile");
+                spanProfile.addEventListener("click", () => {
+                    let windowP = document.querySelector(".window-profile");
+                    windowP.style.display = (windowP.style.display == 'block') ? 'none' : 'block';
+
+                    console.log(spanProfile.classList);
+                    if(spanProfile.classList.contains("span-profile-dark")){
+                        console.log("Removing class");
+                        spanProfile.classList.remove("span-profile-dark");
+                    }
+                    else{
+                        console.log("Adding class");
+                        spanProfile.classList.add("span-profile-dark")
+                    }
+                     console.log(spanProfile.classList);
+                });
+
+                if( document.querySelector(".p-error>span")){
+                    let spanError = document.querySelector(".p-error>span");
+                    spanError.addEventListener('click', () => {
+                        window.location.href = '/';
+                    });
+                }
+
+                spanPub = document.querySelector(".span-pub");
+                spanPub.addEventListener('click', () => {
+                    document.querySelector("form").submit();
+                });
+
+                spanCancel = document.querySelector(".span-cancel");
+                spanCancel.addEventListener('click', () => {
+                    window.location.href = '/';
+                });
+
+            {{! }); }}
+        </script>
+    </body>
+</html>

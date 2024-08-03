@@ -1,67 +1,37 @@
 const express = require('express');
 const router = express.Router();
 
-
-router.get("/", (req, res) =>{
-    if(!req.cookies.acess)
-        res.redirect("/welcome");
-    else if(req.session.user)
-        res.render("home", {login: "false"});
-    else
-        res.render("home");
-});
-
-router.get("/welcome", (req, res) =>{
-    if(req.cookies.acess){
-        res.redirect("/");
-    }else{
-        res.cookie("acess", "acess-true");
-        if(req.session.user){
-            res.render("welcome", {login: "false"});
-        }else{
-            res.render("welcome");
-        }
-    }
-});
+const contentModel = require("../model/contentModel");
+const auth = require("../middlewares/checkSessionAuth");
 
 
-router.get('/login', (req, res) =>{
-    res.render('login');
+router.get("/search", require("../controllers/search"));
 
-});
+const home = require("../controllers/home")
+router.get("/", home.verifyError, home.verifyAuth, home.prepareData, home.catchSearch, home.get);
 
-router.post('/login', (req, res)=>{
-    let { username, password } = req.body;
-    if(process.env.USER_USERNAME === username&&process.env.USER_PASSWORD === password){
-        req.session.user = process.env.USER_USERNAME;
-        res.redirect("/");
-    }else{
-        res.render("login", {error: "Usuário ou senha incorretos"});
-    }   
+const account = require("../controllers/account")
+router.get('/login', account.loginGet);
+router.post('/login', account.loginPost);
 
-});
+router.get("/logout", account.logout);
 
+const validSchema = require("../middlewares/validSchemas");
+const idCount = require("../middlewares/idCount");
+const create = require("../controllers/create")
+router.get("/create", auth, create.get);
+router.post("/create", idCount, validSchema, create.post);
 
+router.get("/content/:route", require("../controllers/generic"));
 
-// router.get("/create", (req, res) =>{
-    
-// });
+router.get("/managment", auth, require("../controllers/managment"));
 
+router.get("/delete/:id", auth, require("../controllers/delete"));
 
-// router.get("", (req, res) =>{
+const edit = require("../controllers/edit");
+router.get("/edit/:id", auth, edit.get);
+router.post("/edit/:id", edit.post);
 
-// });
-
-
-
-
-
-
-
-
-router.get("", (req, res) =>{
-
-});
 
 
 module.exports = router;

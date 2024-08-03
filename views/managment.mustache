@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="/css/images/Logo-echoCMS.svg" type="image/icon">
+        <link rel="stylesheet" href="/css/managment.css">
+        <title>Gerenciar</title>
+
+    </head>
+    <body>
+        <header>
+            <a href="/"><span class="span-logo"></span></a>
+            <span class="span-profile"></span>
+            
+            <div class="window-profile"><a href="/logout"><span>Sair da Conta</a></span></div>
+            
+        </header>
+
+        <div style="display: flex; width: 100%; height: 100%;"><div class="div-main">
+            <div style="border: 2px solid #3D5571; border-radius: 0.4%/1%; width: 97%; height: 94%; margin: auto; align-self: center; overflow-y: scroll;">
+                <div class="div-header">
+                    <span style="width: 6.95%;">ID</span>
+                    <span style="width: 27.45%;">Título da Página</span>
+                    <span style="width: 18.89%;">Link / Rota</span>
+                    <span style="width: 15.2%;">Data de Criação</span>
+                    <span style="width: 16.6%;">Última Atualização</span>
+                    <span style="width: 9.5%;">Status</span>
+                </div>
+                {{#content}}
+                    <div class="div-content" content-id="{{id}}">
+                        <p style="width: 6.95%;">{{id}}</p>
+                        <p style="width: 27.45%;">{{title}}</p>
+                        <p style="width: 18.89%;">{{route}}</p>
+                        <p style="width: 15.2%;">{{dateCreate}}</p>
+                        <p style="width: 16.6%;">{{dateUp}}</p>
+                        <p style="width: 9.5%;">Online</p>
+                        <div style="display: flex; width: 5%; border-right-style: none; cursor: pointer; user-select: none;">
+                            <span class="span-edit" style="display: block; margin-left: 15%; background-image: url('./css/images/editar.png'); width: 30%; height: 80%; background-size: contain; background-repeat: no-repeat;"></span>
+                            <span class="span-delete" style="display: block; margin-left: 18%; color: rgb(184, 51, 51); font-size: 110%;">×</span>
+                        </div>
+                    </div>
+                {{/content}}
+            </div>
+        </div></div>
+
+        <script>
+            if(document.querySelector(".div-content")){
+
+                let contents = document.querySelectorAll('.div-content');
+                contents.forEach((content) => {
+
+                    let spanDelete = content.querySelector(".span-delete");
+
+                    spanDelete.addEventListener('click', () =>{
+                        let id = content.getAttribute("content-id");
+
+                        window.location.href = "/delete/"+id;
+                    });
+
+                    let spanEdit = content.querySelector(".span-edit");
+                    
+                    spanEdit.addEventListener('click', () => {
+                        let id = content.getAttribute("content-id");
+
+                        window.location.href = "/edit/"+id;
+
+                    })
+                })
+            }
+        </script>
+    </body>
+</html> 
