@@ -1,6 +1,7 @@
 const contentModel = require("../model/contentModel");
 
 module.exports = {
+
     verifyAuth : function(req, res, next){
         if(req.session.error){
             res.locals.login = undefined;
