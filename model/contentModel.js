@@ -13,13 +13,13 @@ module.exports = {
             image: image,
             text: text
         }
-        fs.writeFileSync(`data/${content.route.replace('/', '')}.json`, JSON.stringify(content));    
+        fs.writeFileSync(`Data/${content.route.replace('/', '')}.json`, JSON.stringify(content));   
     },
     getContents: async function(){
-        let files = await getFilesByDirectory("./data");
+        let files = await getFilesByDirectory("./Data");
         let contents = [];
         files.forEach((file)=>{
-            contents.push(JSON.parse(fs.readFileSync("./data/"+file, 'utf8')));
+            contents.push(JSON.parse(fs.readFileSync("./Data/"+file, 'utf8')));
         })
         return contents;
     },
@@ -50,11 +50,11 @@ module.exports = {
         return((await this.getContents()) == []);
     },
     deleteContentById: async function(id){
-        let files = await getFilesByDirectory("./data");
+        let files = await getFilesByDirectory("./Data");
         files.forEach((file)=>{
-            let idFile = JSON.parse(fs.readFileSync("./data/"+file, 'utf8')).id;
+            let idFile = JSON.parse(fs.readFileSync("./Data/"+file, 'utf8')).id;
             if(id == idFile)
-                fs.unlinkSync("./data/"+file);
+                fs.unlinkSync("./Data/"+file);
         })
     },
     editContentById: async function(id, title, image, text){
@@ -68,7 +68,7 @@ module.exports = {
                 content.image = image,
                 content.text = text
                 
-                fs.writeFileSync(`data/${content.route.replace('/', '')}.json`, JSON.stringify(content));
+                fs.writeFileSync(`Data/${content.route.replace('/', '')}.json`, JSON.stringify(content));
             }
             
         });
